@@ -57,7 +57,8 @@ export class DemoFormWithValidationsExplicitComponent implements OnInit {
   }
 
   onSubmit(value: string): void {
-    console.log('you submitted value: ', value, ' and form  validity is ', this.myForm.valid, ' with errors ', this.sku.hasError('invalidSku'));
+    console.log('you submitted value: ', value, ' and form  validity is ', this.myForm.valid, ' with errors ',
+      this.sku.hasError('invalidSku'));
   }
 
 
