@@ -27,10 +27,30 @@ export class DemoFormWithValidationsExplicitComponent implements OnInit {
 
   constructor(fb: FormBuilder) {
     this.myForm = fb.group({
-      'sku': ['', Validators.compose([Validators.required, skuValidator])]
+      'sku': ['a', Validators.compose([Validators.required, skuValidator])]
     });
 
     this.sku = this.myForm.controls['sku'];
+
+    // for some reason this only fires correctly when the sku has a value. Otherwise value and form are always undefined.
+    this.sku.valueChanges.subscribe(
+      (value: string) => {
+        if (!value === undefined) {
+          console.log('Sku changed to ', value);
+        } else {
+          console.log('Sku changed to undefined');
+        }
+      }
+    );
+    this.myForm.valueChanges.subscribe(
+      (form: any) => {
+        if (!form === undefined) {
+          console.log('Form changed to ', form);
+        } else {
+          console.log('Form changed to undefined');
+        }
+      }
+    );
   }
 
   ngOnInit() {
